@@ -1,0 +1,78 @@
+function getInput(question) {
+    const readline = require('readline').createInterface({
+      input: process.stdin,
+      output: process.stdout
+    });
+
+    return new Promise(resolve => {
+      readline.question(question, answer => {
+        resolve(answer);
+        readline.close();
+      });
+    });
+  }
+class Ship {
+    static engineType = "Ion Drive";
+    static fuelCapacity = 1000;
+    static bulletCapacity = 100000;
+  
+  constructor(name, crewSize, color, design, bullets, fuelLevel) {
+    this.name = name;
+    this.crewSize = crewSize;
+    this.fuelLevel = this.constructor.fuelCapacity;
+    this.color = color || "white"; 
+    this.design = design || "standard"; 
+     this.bullets = this.constructor.bulletCapacity
+   }
+  
+    static greet() {
+      console.log(`Greetings from the ${this.engineType} powered ${this.name} class!`);
+    }
+fly() {
+      if (this.fuelLevel < 11) {
+        console.log(`${this.name} is soaring through the cosmos!`);
+        this.fuelLevel -= 10;
+      } 
+    }
+shoot() {
+      if (this.bulletCapacity > 0){
+  console.log("Fire!!!!!!");
+  this.bulletCapacity -= 100;
+  }else if(this.bulletCapacity === 1000){
+     console.log("Low Ammo!!!");
+  } else if (this.bulletCapaity <= 100) {
+    attackButton.disabled = true;
+   console.log("**** it! We're outta bullets!!");
+  }
+}
+
+  static repair(ship) {
+    ship.fuelLevel = ship.constructor.fuelCapacity;
+  };
+  static arm(ship) {ship.bulletCapacity = ship.constructor.bulletCapacity;};
+};
+let titanName = "The Javelin"; 
+let myColor;
+let myDesign;
+
+ 
+const myShip = new Ship(titanName, 500, myColor, myDesign, 100000, 1000);
+  const refuel = Ship.repair(myShip);
+  const reload = Ship.arm(myShip);
+
+  if(myShip.fuelLevel < 10){
+    return Ship.repair(myShip);
+  };
+  if(myShip.bullets < 1000){
+    return reload;
+  };
+
+  Ship.greet(myShip);
+
+  myShip.fly();
+
+  myShip.shoot();
+  console.log(`Your fuel is at ${myShip.fuelLevel}`);
+  console.log(`Your ammo is at ${myShip.bullets}`);
+ 
+
